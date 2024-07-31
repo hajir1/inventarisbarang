@@ -1,0 +1,51 @@
+POST http://localhost:3000/register
+Content-Type: application/json
+
+{
+    "username":"admin",
+    "password":"admin",
+    "role":"admin"
+}
+
+
+###
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "username":"admin",
+    "password":"admin"
+}
+
+###
+get http://localhost:3000/me
+
+###
+get http://localhost:3000/alat/alat
+
+
+###
+get http://localhost:3000/alat/extra/5
+
+###
+DELETE  http://localhost:3000/alat/hapusalat
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInV1aWQiOiJmZDQwMjAzYi0xMWQyLTQ1ZWItYTg5My0zZWY5MzM5YjIwZjUiLCJpYXQiOjE3MjIyNjE4MDQsImV4cCI6MTcyMjMxOTQwNH0.v-URCqx_-7VnlqpR_FLNuh0jmjeGkwIDcYkNv7BTXMo
+
+###
+get http://localhost:3000/alat/servicealat
+
+###
+POST http://localhost:3000/alat/tambahalat
+Content-Type: application/json
+  
+
+{
+    "nama_alat":"pulpen",
+    "kondisi":"tidak rusak",
+    "deskripsi":"digunakan di bagian admin",
+    "jumlah":2,
+    "no_seri":"9234j",
+    "diperoleh":"pemerintah",
+}
+###
+get http://localhost:3000/alat/dipakaialat

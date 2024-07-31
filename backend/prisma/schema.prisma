@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model alats {
+  id        Int        @id @default(autoincrement())
+  nama_alat String     @db.VarChar(100)
+  gambar    String?    @db.VarChar(100)
+  url       String?    @db.VarChar(100)
+  service   Boolean?   @default(false)
+  kondisi   String?    @db.VarChar(200)
+  dipakai   Boolean?   @default(false)
+  deskripsi String?    @db.VarChar(100)
+  no_seri   String?    @db.VarChar(100)
+  jumlah    String?    @db.VarChar(100)
+  diperoleh String?    @db.VarChar(100)
+  dipakais  dipakais[]
+  services  services[]
+}
+
+model dipakais {
+  id            Int     @id @default(autoincrement())
+  nama_pemakai  String? @db.VarChar(100)
+  waktu_pinjam  String? @db.VarChar(100)
+  waktu_selesai String? @db.VarChar(100)
+  deskripsi     String? @db.VarChar(100)
+  alat_id       Int?
+  alats         alats?  @relation(fields: [alat_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_dipakai_alats")
+
+  @@index([alat_id], map: "fk_dipakai_alats")
+}
+
+model services {
+  id            Int     @id @default(autoincrement())
+  jenis_service String? @db.VarChar(100)
+  waktu         String? @db.VarChar(100)
+  waktu_selesai String? @db.VarChar(100)
+  gambar        String? @db.VarChar(100)
+  url           String? @db.VarChar(100)
+  alat_id       Int?
+  alats         alats?  @relation(fields: [alat_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_service_alats")
+
+  @@index([alat_id], map: "fk_service_alats")
+}
+
+model users {
+  id        Int    @id @default(autoincrement())
+  username  String @unique(map: "username") @db.VarChar(100)
+  passwords String @db.VarChar(100)
+  roles     String @db.VarChar(100)
+  uuid      String @db.VarChar(200)
+}
