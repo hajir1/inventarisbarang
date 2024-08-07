@@ -1,14 +1,15 @@
 import React from "react";
-import { useDashboard, useToken } from "../../state/zustand";
+import { useDashboard, useDeleteAll, useToken } from "../../state/zustand";
 import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   const { dashboard, setDashboard } = useDashboard();
   const { token } = useToken();
+  const { del } = useDeleteAll();
   return (
     <div
-      className={`${
-        dashboard ? "w-1/3" : "hidden"
+      className={`${dashboard ? "w-1/3" : "hidden"} ${
+        del && "bg-red-500"
       } lg:block lg:w-1/5 min-h-screen bg-indigo-500 text-white`}
     >
       <div className="flex flex-col w-full items-center p-4">

@@ -27,7 +27,6 @@ const PostDataAlat = () => {
       nama_alat: "",
       kondisi: "tidak rusak",
       deskripsi: "",
-      jumlah: 0,
       diperoleh: "",
       no_seri: "",
     },
@@ -37,7 +36,6 @@ const PostDataAlat = () => {
       form.append("nama_alat", value.nama_alat);
       form.append("kondisi", value.kondisi);
       form.append("deskripsi", value.deskripsi);
-      form.append("jumlah", value.jumlah);
       form.append("diperoleh", value.diperoleh);
       form.append("no_seri", value.no_seri);
       APITambahAlat(form, (cb) => {
@@ -53,6 +51,7 @@ const PostDataAlat = () => {
           value.deskripsi = "";
           setErrorMessage("");
         } else {
+          console.log(cb)
           setErrorMessage(cb?.response?.data?.message);
         }
       });
@@ -79,7 +78,7 @@ const PostDataAlat = () => {
         <div className="space-y-12">
           <div className="border-b border-gray-900/10">
             <h2 className="text-xl pt-5 text-gray-900 sm:pr-12 font-mono uppercase ">
-              Tambahkan Alat
+              Tambahkan Inventaris
             </h2>
 
             <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-6">
@@ -165,26 +164,10 @@ const PostDataAlat = () => {
                 </select>
               </div>
             </div>
-            <div className="flex justify-evenly gap-2 w-full">
+            <div className="flex justify-evenly gap-2 w-full ">
               {" "}
-              <div className="sm:col-span-2 mt-10">
-                <label
-                  htmlFor="postal-code"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  jumlah
-                </label>
-                <div className="mt-2">
-                  <input
-                    type="text"
-                    placeholder="masukkan jumlah"
-                    {...formik.getFieldProps("jumlah")}
-                    autoComplete="jumlah"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset  outline-none pl-2 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-              <div className="sm:col-span-2 mt-10">
+             
+              <div className="sm:col-span-2 mt-10 w-2/5">
                 <label
                   htmlFor="postal-code"
                   className="block text-sm font-medium leading-6 text-gray-900"
@@ -197,11 +180,11 @@ const PostDataAlat = () => {
                     placeholder="masukkan nomor seri"
                     {...formik.getFieldProps("no_seri")}
                     autoComplete="no seri"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset  outline-none pl-2 sm:text-sm sm:leading-6"
+                    className="block w-full  rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset  outline-none pl-2 sm:text-sm sm:leading-6"
                   />
                 </div>
               </div>
-              <div className="sm:col-span-2 mt-10">
+              <div className="sm:col-span-2 mt-10 w-2/5">
                 <label
                   htmlFor="postal-code"
                   className="block text-sm font-medium leading-6 text-gray-900"

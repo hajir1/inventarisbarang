@@ -17,7 +17,6 @@ model alats {
   dipakai   Boolean?   @default(false)
   deskripsi String?    @db.VarChar(100)
   no_seri   String?    @db.VarChar(100)
-  jumlah    String?    @db.VarChar(100)
   diperoleh String?    @db.VarChar(100)
   dipakais  dipakais[]
   services  services[]

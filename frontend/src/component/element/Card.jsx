@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { ButtonCard } from "./Button";
+import { useDeleteAll } from "../../state/zustand";
 
 export const CardAlat = ({
   data,
@@ -8,8 +9,13 @@ export const CardAlat = ({
   handleServiceById,
 }) => {
   const navigate = useNavigate();
+  const { del } = useDeleteAll();
   return (
-    <div className="group relative p-1 border border-slate-300 shadow-lg">
+    <div
+      className={`${
+        del && "blur-sm"
+      } group relative p-1 border border-slate-300 shadow-lg`}
+    >
       <h2 className="text-xl p-3 text-gray-900 sm:pr-12 font-mono uppercase ">
         {data?.nama_alat} {data?.no_seri}
       </h2>
@@ -39,9 +45,6 @@ export const CardAlat = ({
         </div>
         <p className="text-sm text-black font-mono mt-8">
           kondisi saat ini {data?.kondisi}
-        </p>
-        <p className="text-sm text-gray-800 font-mono">
-          jumlah saat ini ada {data?.jumlah}
         </p>
       </div>
       <div className="mt-4 flex flex-col z-10 gap-y-1 lg:flex-row lg:justify-evenly relative flex-wrap">

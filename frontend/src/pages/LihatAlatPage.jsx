@@ -10,7 +10,7 @@ import {
   APITambahPakai,
   APITambahService,
 } from "../services/API_CALL.service";
-import { useDashboard, useToken } from "../state/zustand";
+import { useDashboard, useDeleteAll, useToken } from "../state/zustand";
 import { AlertGagal, AlertSukses } from "../component/element/Alert";
 import { useFormik } from "formik";
 import { Search } from "../component/fragment/Search";
@@ -23,6 +23,7 @@ import { currentDate } from "../libs/Waktu";
 const GetDataMobil = () => {
   const [alats, setAlats] = useState([]);
   const { dashboard } = useDashboard();
+  const { del, setDel } = useDeleteAll();
   const { token } = useToken();
   const [searchAlats, setSearchAlats] = useState("");
   const [alatsByName, setAlatsByName] = useState([]);
@@ -30,7 +31,6 @@ const GetDataMobil = () => {
   const [pakaiById, setPakaiById] = useState(null);
   const [serviceById, setServiceById] = useState(null);
   const [hapusById, setHapusById] = useState(null);
-  const [hapus, setHapus] = useState(false);
   const [suksesPakai, setSuksesPakai] = useState(false);
   const [suksesService, setSuksesService] = useState(false);
   useEffect(() => {
@@ -38,7 +38,9 @@ const GetDataMobil = () => {
       setAlats(cb?.data?.data);
     });
   }, []);
-
+  useEffect(() => {
+    setErrorMessage("");
+  }, [pakaiById, serviceById]);
   useEffect(() => {
     if (searchAlats !== "") {
       APIGetAlatByName(searchAlats, (cb) => {
@@ -103,9 +105,9 @@ const GetDataMobil = () => {
           window.scrollTo({ top: 0, behavior: "smooth" });
           setSuksesPakai(true);
         } else {
-          value.alat_id = ""
-          value.jenis_service= ""
-          value.waktu= ""
+          value.alat_id = "";
+          value.jenis_service = "";
+          value.waktu = "";
           if (cb?.response?.data?.message !== "") {
             setErrorMessage(cb?.response?.data?.message);
           } else {
@@ -128,9 +130,9 @@ const GetDataMobil = () => {
           window.scrollTo({ top: 0, behavior: "smooth" });
           setSuksesService(true);
         } else {
-          value.alat_id = ""
-          value.jenis_service= ""
-          value.waktu= ""
+          value.alat_id = "";
+          value.jenis_service = "";
+          value.waktu = "";
           if (cb?.response?.data?.message !== "") {
             setErrorMessage(cb?.response?.data?.message);
           } else {
@@ -140,6 +142,7 @@ const GetDataMobil = () => {
       });
     },
   });
+
   const handleServiceById = (e, id) => {
     const dataId = alats.find((item) => item.id === id);
     setServiceById(dataId.id);
@@ -155,7 +158,11 @@ const GetDataMobil = () => {
         </h2>
       )}
       {alats?.length > 1 && (
-        <h1 className="text-base italic text-red-600 text-right mr-10">
+        <h1
+          className={`${
+            del && "blur-sm"
+          } text-base italic text-red-600 text-right mr-10`}
+        >
           jika alat mempunyai riwayat service atau dipakai tidak bisa dihapus
         </h1>
       )}
@@ -164,6 +171,7 @@ const GetDataMobil = () => {
           <AlertSukses
             handleClose={() => {
               setSuksesPakai(!suksesPakai);
+              window.location.reload();
             }}
             title={"sukses menambah data pinjaman"}
             quote={"silahkan cek di halaman alat dipakai"}
@@ -177,7 +185,7 @@ const GetDataMobil = () => {
           <AlertSukses
             handleClose={() => {
               setSuksesService(!suksesService);
-              
+              window.location.reload();
             }}
             title={"sukses menambah data service"}
             quote={"silahkan cek di halaman alat service"}
@@ -186,12 +194,12 @@ const GetDataMobil = () => {
           <></>
         )}
       </div>
-      {hapus && (
+      {del && (
         <AlertGagal
           type={"hard"}
           height={"h-64"}
           handleDelete={formik.handleSubmit}
-          handleClose={() => setHapus(false)}
+          handleClose={() => setDel(false)}
           quote={"apakah anda yakin ingin menghapus seluruh data"}
         >
           <form>
@@ -207,7 +215,7 @@ const GetDataMobil = () => {
         </AlertGagal>
       )}
       <Search
-        btnClick={() => setHapus(true)}
+        btnClick={() => setDel(true)}
         changeInput={(e) => setSearchAlats(e.target.value)}
         valueInput={searchAlats}
         classFormat={alats}
@@ -237,7 +245,9 @@ const GetDataMobil = () => {
                 )}
                 {pakaiById === alat?.id && (
                   <Overlay
-                    close={() => {setErrorMessage(""),setPakaiById(null)}}
+                    close={() => {
+                      setErrorMessage(""), setPakaiById(null);
+                    }}
                     errorMessage={""}
                     handleSubmit={formikPakai.handleSubmit}
                     title={`pinjam alat ${alat?.nama_alat}`}
@@ -285,7 +295,9 @@ const GetDataMobil = () => {
                 )}
                 {serviceById === alat?.id && (
                   <Overlay
-                    close={() => {setErrorMessage(""),setServiceById(null)}}
+                    close={() => {
+                      setErrorMessage(""), setServiceById(null);
+                    }}
                     errorMessage={""}
                     handleSubmit={formikService.handleSubmit}
                     title={`service alat ${alat?.nama_alat}`}
@@ -441,7 +453,7 @@ const LihaAlatPage = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
   useEffect(() => {
-    if (!token ) {
+    if (!token) {
       navigate("/");
     }
   }, []);

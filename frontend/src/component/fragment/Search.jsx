@@ -1,9 +1,12 @@
+import { useDeleteAll } from "../../state/zustand";
+
 export const Search = ({ classFormat, valueInput, changeInput, btnClick }) => {
+  const { del } = useDeleteAll();
   return (
     <div
       className={`${
-        classFormat.length < 1 && "hidden"
-      } pt-2 relative mx-auto text-gray-600 lg:w-4/5 flex justify-between p-1`}
+        classFormat?.length < 1 && "hidden"
+      } ${del && "blur-sm"} pt-2 relative mx-auto text-gray-600 lg:w-4/5 flex justify-between p-1`}
     >
       <input
         className="block pl-2 rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-800 placeholder:tracking-widest w-3/5 outline-none mt-16   sm:text-sm sm:leading-6"
@@ -11,7 +14,7 @@ export const Search = ({ classFormat, valueInput, changeInput, btnClick }) => {
         value={valueInput}
         onChange={changeInput}
         name="search"
-        placeholder="Cari Alat"
+        placeholder="Cari Inventaris"
       />
       <button
         type="submit"

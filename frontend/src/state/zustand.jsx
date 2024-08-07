@@ -22,3 +22,14 @@ export const useToken = create(
     { name: "token" }
   )
 );
+export const useDeleteAll = create((set, get) => ({
+  del: false,
+  setDel: () => {
+    const db = get().del;
+    if (db) {
+      set({ del: false });
+    } else {
+      set({ del: true });
+    }
+  },
+}));

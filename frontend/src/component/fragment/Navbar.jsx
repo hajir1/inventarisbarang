@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useDashboard, useToken } from "../../state/zustand";
+import { useDashboard, useDeleteAll, useToken } from "../../state/zustand";
 import IconOrang from "../element/Icon/IconOrang";
-import { APILogout} from "../../services/API_CALL.service";
+import { APILogout } from "../../services/API_CALL.service";
 
 const Navbar = () => {
   const [hamburgerMenu, sethamburgerMenu] = useState(false);
   const { setDashboard } = useDashboard();
   const { token, logout } = useToken();
+  const { del } = useDeleteAll();
   return (
-    <div className="w-full h-12 bg-indigo-600">
+    <div className={`${del && "bg-red-500"} w-full h-12 bg-indigo-600`}>
       <div className="h-full flex items-center justify-between ">
         <div
           onClick={() => {

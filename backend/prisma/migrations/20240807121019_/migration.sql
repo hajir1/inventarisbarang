@@ -9,7 +9,6 @@ CREATE TABLE `alats` (
     `dipakai` BOOLEAN NULL DEFAULT false,
     `deskripsi` VARCHAR(100) NULL,
     `no_seri` VARCHAR(100) NULL,
-    `jumlah` VARCHAR(100) NULL,
     `diperoleh` VARCHAR(100) NULL,
 
     PRIMARY KEY (`id`)

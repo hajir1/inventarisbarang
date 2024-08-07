@@ -28,7 +28,7 @@ export const TambahAlat = async (req) => {
     if (file) {
       await file.mv(filePath);
     }
-   
+
     return await Prisma.alats.create({
       data: {
         gambar: fileName,
@@ -36,9 +36,8 @@ export const TambahAlat = async (req) => {
         nama_alat: dataValid.nama_alat,
         deskripsi: dataValid.deskripsi,
         no_seri: dataValid.no_seri,
-        jumlah: req.body.jumlah,
         kondisi: dataValid.kondisi,
-        diperoleh: dataValid.diperoleh
+        diperoleh: dataValid.diperoleh,
       },
     });
   } catch (error) {

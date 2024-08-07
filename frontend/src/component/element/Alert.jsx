@@ -27,9 +27,9 @@ export const AlertGagal = ({
   children,
 }) => {
   return (
-    <div className="w-full absolute flex justify-center">
+    <div className="w-full absolute flex justify-center top-0">
       <div
-        className={`${height} bg-orange-100 border-l-4 border-orange-500  w-96 text-orange-700 p-4 absolute z-10 h-auto`}
+        className={`${height} bg-orange-100 border-l-4 border-orange-500  w-96 text-orange-700 p-4 absolute z-10 h-auto `}
         role="alert"
       >
         <p className="font-bold">peringatan</p>
@@ -51,7 +51,6 @@ export const AlertGagal = ({
             hapus
           </button>
         </div>
-        
       </div>
     </div>
   );
