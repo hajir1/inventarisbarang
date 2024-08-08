@@ -5,8 +5,8 @@ import fileUpload from "express-fileupload";
 import session from "express-session";
 // import KnexSessionStore from "connect-session-knex";
 // import knex from "knex";
-import { ErrorMiddleware } from "./middleware/ErrorMiddleware.js";
-import routes from "./routes/mainRoute.js";
+import { ErrorMiddleware } from "./middleware/ErrorMiddleware.mjs";
+import routes from "./routes/mainRoute.mjs";
 dotenv.config();
 
 const app = express();

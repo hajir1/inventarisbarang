@@ -15,7 +15,7 @@ import {
   ServiceAlat,
   TambahAlat,
   TambahDipakai,
-} from "../service/alat.service.js";
+} from "../service/alat.service.mjs";
 
 export const TambahAlatC = async (req, res, next) => {
   try {

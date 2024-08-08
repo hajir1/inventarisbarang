@@ -1,4 +1,4 @@
-import { Prisma } from "../config/prisma.js";
+import { Prisma } from "../config/prisma.mjs";
 
 export const penerimaOnly = async (req, res, next) => {
   if (!req.session.username) {

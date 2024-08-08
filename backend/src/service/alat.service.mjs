@@ -1,13 +1,13 @@
-import { Prisma } from "../config/prisma.js";
-import ResponseError from "../error/ResponseError.js";
+import { Prisma } from "../config/prisma.mjs";
+import ResponseError from "../error/ResponseError.mjs";
 
-import { mainValidate } from "../validation/mainValidate.js";
+import { mainValidate } from "../validation/mainValidate.mjs";
 import path from "path";
 import {
   alatValidate,
   dipakaiValidate,
   serviceValidate,
-} from "../validation/routing.validate.js";
+} from "../validation/routing.validate.mjs";
 export const TambahAlat = async (req) => {
   const file = req.files.file;
   const dataValid = mainValidate(alatValidate, req.body);

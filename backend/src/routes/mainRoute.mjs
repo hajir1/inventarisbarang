@@ -1,8 +1,8 @@
 import express from "express";
 
 const routes = express.Router();
-import userRoute from "./user.route.js";
-import alatRoute from "./alat.route.js";
+import userRoute from "./user.route.mjs";
+import alatRoute from "./alat.route.mjs";
 
 const router = [
   {

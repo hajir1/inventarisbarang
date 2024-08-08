@@ -16,8 +16,8 @@ import {
   ServiceAlatC,
   TambahAlatC,
   TambahDiapakaiC,
-} from "../controller/alat.controller.js";
-import verifyToken from "../middleware/auth.js";
+} from "../controller/alat.controller.mjs";
+import verifyToken from "../middleware/auth.mjs";
 
 const route = express.Router();
 route.post("/tambahalat", TambahAlatC);

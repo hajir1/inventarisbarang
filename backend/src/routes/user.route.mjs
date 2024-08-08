@@ -5,7 +5,7 @@ import {
   Logout,
   Me,
   RegisterUserC,
-} from "../controller/user.controller.js";
+} from "../controller/user.controller.mjs";
 
 const route = express.Router();
 route.post("/register", RegisterUserC);

@@ -1,10 +1,10 @@
 import bcrypt from "bcrypt";
-import { mainValidate } from "../validation/mainValidate.js";
-import { Prisma } from "../config/prisma.js";
-import ResponseError from "../error/ResponseError.js";
+import { mainValidate } from "../validation/mainValidate.mjs";
+import { Prisma } from "../config/prisma.mjs";
+import ResponseError from "../error/ResponseError.mjs";
 import { v4 as uuidv4 } from "uuid";
 import jwt from "jsonwebtoken";
-import { loginValidate, userValidate } from "../validation/routing.validate.js";
+import { loginValidate, userValidate } from "../validation/routing.validate.mjs";
 export const RegisterUser = async (req) => {
   const dataValid = mainValidate(userValidate, req);
   const dataId = await Prisma.users.findUnique({

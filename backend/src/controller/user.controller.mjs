@@ -1,9 +1,9 @@
-import { Prisma } from "../config/prisma.js";
+import { Prisma } from "../config/prisma.mjs";
 import {
   Login,
   RegisterUser,
   getUsers,
-} from "../service/user.service.js";
+} from "../service/user.service.mjs";
 
 export const RegisterUserC = async (req, res, next) => {
   try {
